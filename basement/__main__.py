@@ -25,6 +25,9 @@ def ment(directory, template, verbose):
     """
     try:
         process(template, directory, verbose=verbose)
+        message = "Rendered template '{template}' at {output}"
+        print(message.format(template=template,
+                             output=abspath(directory)))
     except AlreadyExistsError as e:
         print(e)
         sys.exit(1)
