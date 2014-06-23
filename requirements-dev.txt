@@ -1,0 +1,4 @@
+-r requirements.txt
+rope
+elpy
+ipython
