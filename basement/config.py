@@ -1,6 +1,5 @@
 """Configuration for basement and templates."""
 import sys
-import os
 from os import path
 from shutil import copytree
 from pkg_resources import resource_filename, Requirement
