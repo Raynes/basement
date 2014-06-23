@@ -1,6 +1,7 @@
 import os
 from os import path
 from shutil import copytree
+from pprint import pprint
 
 from pystache import render
 
@@ -30,13 +31,16 @@ def apply_to_contents(data, name):
         f.truncate()
 
 
-def process(template, output):
+def process(template, output, verbose=False):
     """Process a template directory, creating our final output"""
     if path.exists(output):
         raise AlreadyExistsError("Output path already exists!")
     else:
         data = config.template_config(template)
         data['project-name'] = path.basename(output)
+        if verbose:
+            print("Data is:")
+            pprint(data)
         copytree(config.lookup_template(template), output)
         for dirpath, directories, files in os.walk(output):
             for f in files + directories:

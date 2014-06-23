@@ -1,6 +1,7 @@
 """Entry point"""
 import sys
 import click
+from os.path import abspath
 
 from basement.process import process, AlreadyExistsError
 from basement.config import TemplateDoesntExistError
@@ -10,7 +11,9 @@ from basement.config import TemplateDoesntExistError
 @click.argument('directory')
 @click.option('--template', '-t', default='default',
               help="The name of the template to use.")
-def ment(directory, template):
+@click.option('--verbose', '-v', is_flag=True,
+              help="When verbose is true, the template data is printed.")
+def ment(directory, template, verbose):
     """Generate a Python project based on a template.
     Templates are stored in ~/.basement-templates and
     are simply mustache templates that are rendered
@@ -21,7 +24,7 @@ def ment(directory, template):
 
     """
     try:
-        process(template, directory)
+        process(template, directory, verbose=verbose)
     except AlreadyExistsError as e:
         print(e)
         sys.exit(1)
