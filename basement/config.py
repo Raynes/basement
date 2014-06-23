@@ -1,7 +1,8 @@
 """Configuration for basement and templates."""
 import sys
+import os
 from os import path
-from shutil import copytree
+from shutil import copytree, rmtree
 from pkg_resources import resource_filename, Requirement
 
 import toml
@@ -9,13 +10,28 @@ import toml
 # WHAT DOES IT ALL MEAAAAAAAAN
 THIS = Requirement.parse('basement')
 
+BUILT_IN_DIR = resource_filename(THIS, 'templates')
 TEMPLATES_DIR = path.expanduser('~/.basement-templates')
 
 # Create the templates directory if it doesn't exist.
 if not path.isdir(TEMPLATES_DIR):
-    copytree(resource_filename(THIS, 'templates'), TEMPLATES_DIR)
+    copytree(BUILT_IN_DIR, TEMPLATES_DIR)
 else:
-    pass # TODO: Update things
+    old = set(os.listdir(TEMPLATES_DIR))
+    new = os.listdir(BUILT_IN_DIR)
+    # Every run will delete and replace built in templates
+    # This isn't optimal, since it takes time, but it is
+    # a very small amount of time and work and makes sure
+    # everyone's basement-shipped templates are consistent
+    # over versions. They're not meant to be modified.
+    for template in new:
+        old_path = path.join(TEMPLATES_DIR, template)
+        new_path = path.join(BUILT_IN_DIR, template)
+        if template in old:
+            rmtree(old_path)
+        else:
+            print("Adding new template {}...".format(template))
+        copytree(new_path, old_path)
 
 
 try:
