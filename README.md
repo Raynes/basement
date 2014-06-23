@@ -108,6 +108,22 @@ setup(
 )
 ```
 
+#### Ignoring Files
+
+Sometimes you don't want to touch certain files, in particular binary
+files. `pystache`, the library basement uses to render mustache templates, often
+does not like being fed binary files and you most certainly don't want huge
+files to be read into memory to be rendered! For these situations, basement
+provides a flexible mechanism for ignoring files. It works like so:
+
+```
+pass = ['path/to/be/ignored/.*']
+```
+
+`pass` can appear in your configuration and as each file is rendered, it is
+checked against the regular expressions using Python's `re.search` function. If
+any of the patterns match that file path, it is ignored and simply passed through.
+
 ## Creating Templates
 
 Basement is designed so you can create your own templates really easily. All you

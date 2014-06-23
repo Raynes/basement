@@ -2,6 +2,7 @@ import os
 from os import path
 from shutil import copytree
 from pprint import pprint
+import re
 
 from pystache import render
 
@@ -31,6 +32,17 @@ def apply_to_contents(data, name):
         f.truncate()
 
 
+def should_pass(f, patterns):
+    """Checks f against pass patterns to see if we should copy
+    f unchanged.
+
+    """
+    for pattern in patterns:
+        pattern = re.compile(pattern)
+        if pattern.search(f):
+            return True
+    return False
+
 def process(template, output, verbose=False):
     """Process a template directory, creating our final output"""
     if path.exists(output):
@@ -38,6 +50,7 @@ def process(template, output, verbose=False):
     else:
         data = config.template_config(template)
         data['project-name'] = path.basename(output)
+        pass_patterns = data.get('pass', [])
         if verbose:
             print("Data is:")
             pprint(data)
@@ -47,4 +60,5 @@ def process(template, output, verbose=False):
                 f = path.join(dirpath, f)
                 apply_to_name(data, f)
                 if path.isfile(f):
-                    apply_to_contents(data, f)
+                    if not should_pass(f, pass_patterns):
+                        apply_to_contents(data, f)
