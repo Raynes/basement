@@ -10,9 +10,9 @@ setup(
     version='0.1.0',
     long_description=__doc__,
     packages=['{{project-name}}'],
-    author='John Doe',
-    author_email='you@yoursite.com',
-    url='https://github.com/you/{{project-name}}',
-    license='MIT',
+    author='{{full-name}}',
+    author_email='{{email}}',
+    url='https://github.com/{{github-user}}/{{project-name}}',
+    license='{{license}}',
     install_requires=requirements
 )
