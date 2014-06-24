@@ -7,11 +7,14 @@ from setuptools import setup
 with open('requirements.txt') as f:
     requirements = f.readlines()
 
+with open('README.md') as f:
+    description = f.read()
+
 setup(
     name='basement',
     description="A python project scaffolding generator.",
     version='0.1.0',
-    long_description=__doc__,
+    long_description=description,
     packages=['basement'],
     include_package_data=True,
     author='Anthony Grimes',
