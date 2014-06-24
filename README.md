@@ -124,6 +124,10 @@ pass = ['path/to/be/ignored/.*']
 checked against the regular expressions using Python's `re.search` function. If
 any of the patterns match that file path, it is ignored and simply passed through.
 
+It's worth noting that basement *always* ignores `.pyc` files. This is because
+setuptools doesn't give me a way to tell it to not compile the template files in
+the basement package, and they'd get copied over to `~/.basement-templates` otherwise.
+
 ## Creating Templates
 
 Basement is designed so you can create your own templates really easily. All you
