@@ -18,7 +18,9 @@ def apply_to_name(data, name):
     in its name to the name with the template rendered.
 
     """
-    os.rename(name, render(name, data))
+    old_path, base = path.split(name)
+    new_path = path.join(old_path, render(base, data))
+    os.rename(name, new_path)
 
 
 def apply_to_contents(data, name):
@@ -55,7 +57,7 @@ def process(template, output, verbose=False):
             print("Data is:")
             pprint(data)
         copytree(config.lookup_template(template), output)
-        for dirpath, directories, files in os.walk(output):
+        for dirpath, directories, files in os.walk(output, topdown=False):
             for f in files + directories:
                 f = path.join(dirpath, f)
                 apply_to_name(data, f)
