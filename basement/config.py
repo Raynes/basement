@@ -3,14 +3,12 @@ import sys
 import os
 from os import path
 from shutil import copytree, rmtree
-from pkg_resources import resource_filename, Requirement
+from pkg_resources import resource_filename
 
 import toml
 
-# WHAT DOES IT ALL MEAAAAAAAAN
-THIS = Requirement.parse('basement')
 
-BUILT_IN_DIR = resource_filename(THIS, 'templates')
+BUILT_IN_DIR = resource_filename('basement', 'templates')
 TEMPLATES_DIR = path.expanduser('~/.basement-templates')
 
 # Create the templates directory if it doesn't exist.
