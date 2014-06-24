@@ -11,6 +11,16 @@ import toml
 BUILT_IN_DIR = resource_filename('basement', 'templates')
 TEMPLATES_DIR = path.expanduser('~/.basement-templates')
 
+
+def clean_pyc(template_path):
+    """Remove all pyc files from the directory tree"""
+    for dirpath, _, files in os.walk(template_path):
+        for f in files:
+            _, ext = path.splitext(f)
+            if ext == '.pyc':
+                os.remove(path.join(dirpath, f))
+
+
 # Create the templates directory if it doesn't exist.
 if not path.isdir(TEMPLATES_DIR):
     copytree(BUILT_IN_DIR, TEMPLATES_DIR)
@@ -30,6 +40,7 @@ else:
         else:
             print("Adding new template {}...".format(template))
         copytree(new_path, old_path)
+        clean_pyc(old_path)
 
 
 try:

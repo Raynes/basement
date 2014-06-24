@@ -62,6 +62,5 @@ def process(template, output, verbose=False):
                 f = path.join(dirpath, f)
                 apply_to_name(data, f)
                 if path.isfile(f):
-                    _, ext = path.splitext(f)
-                    if ext != '.pyc' and not should_pass(f, pass_patterns):
+                    if not should_pass(f, pass_patterns):
                         apply_to_contents(data, f)
