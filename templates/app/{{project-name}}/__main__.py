@@ -1,0 +1,13 @@
+"""Program entry point!"""
+import click
+
+
+@click.command()
+@click.argument('name')
+def {{project-name}}(name):
+    """Greets ya!"""
+    print("Hello, {}.".format(name))
+
+
+if __name__ == '__main__':
+    {{project-name}}()
