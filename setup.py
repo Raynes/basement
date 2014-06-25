@@ -16,7 +16,6 @@ setup(
     version='0.1.5',
     long_description=description,
     packages=['basement'],
-    include_package_data=True,
     author='Anthony Grimes',
     author_email='i@raynes.me',
     url='https://github.com/Raynes/basement',
