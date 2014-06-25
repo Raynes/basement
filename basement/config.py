@@ -12,13 +12,14 @@ BUILT_IN_DIR = resource_filename('basement', 'templates')
 TEMPLATES_DIR = path.expanduser('~/.basement-templates')
 
 
-def clean_pyc(template_path):
-    """Remove all pyc files from the directory tree"""
+def rename_templates(template_path):
+    """Rename all *.basement-template files"""
     for dirpath, _, files in os.walk(template_path):
         for f in files:
-            _, ext = path.splitext(f)
-            if ext == '.pyc':
-                os.remove(path.join(dirpath, f))
+            name, ext = path.splitext(f)
+            if ext == '.basement-template':
+                os.rename(path.join(dirpath, f),
+                          path.join(dirpath, name))
 
 
 # Create the templates directory if it doesn't exist.
@@ -40,7 +41,7 @@ else:
         else:
             print("Adding new template {}...".format(template))
         copytree(new_path, old_path)
-        clean_pyc(old_path)
+        rename_templates(old_path)
 
 
 try:
