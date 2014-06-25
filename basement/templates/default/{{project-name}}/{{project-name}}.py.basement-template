@@ -1,0 +1,6 @@
+"""Library code stuff things goes here."""
+
+
+def stuff(things):
+    for thing in things:
+       print(thing + " and stuff")
