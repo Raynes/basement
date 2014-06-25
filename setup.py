@@ -13,9 +13,10 @@ with open('README.md') as f:
 setup(
     name='basement',
     description="A python project scaffolding generator.",
-    version='0.1.6',
+    version='0.1.7',
     long_description=description,
     packages=['basement'],
+    include_package_data=True,
     author='Anthony Grimes',
     author_email='i@raynes.me',
     url='https://github.com/Raynes/basement',
