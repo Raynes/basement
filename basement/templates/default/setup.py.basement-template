@@ -10,6 +10,7 @@ setup(
     version='0.1.0',
     long_description=__doc__,
     packages=['{{project-name}}'],
+    include_package_data=True,
     author='{{full-name}}',
     author_email='{{email}}',
     url='https://github.com/{{github-user}}/{{project-name}}',
