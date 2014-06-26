@@ -20,7 +20,10 @@ def apply_to_name(data, name):
     """
     old_path, base = path.split(name)
     new_path = path.join(old_path, render(base, data))
-    os.rename(name, new_path)
+    base, ext = path.splitext(new_path)
+    out = base if ext == '.basement-ignore' else new_path
+    os.rename(name, out)
+    return out
 
 
 def apply_to_contents(data, name):
@@ -39,11 +42,13 @@ def should_pass(f, patterns):
     f unchanged.
 
     """
+    patterns.append('basement-ignore$')
     for pattern in patterns:
         pattern = re.compile(pattern)
         if pattern.search(f):
             return True
     return False
+
 
 def process(template, output, verbose=False):
     """Process a template directory, creating our final output"""
@@ -60,7 +65,7 @@ def process(template, output, verbose=False):
         for dirpath, directories, files in os.walk(output, topdown=False):
             for f in files + directories:
                 f = path.join(dirpath, f)
-                apply_to_name(data, f)
-                if path.isfile(f):
+                new_f = apply_to_name(data, f)
+                if path.isfile(new_f):
                     if not should_pass(f, pass_patterns):
-                        apply_to_contents(data, f)
+                        apply_to_contents(data, new_f)
