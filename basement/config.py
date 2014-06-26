@@ -25,6 +25,8 @@ def rename_templates(template_path):
 # Create the templates directory if it doesn't exist.
 if not path.isdir(TEMPLATES_DIR):
     copytree(BUILT_IN_DIR, TEMPLATES_DIR)
+    for template_path in os.listdir(TEMPLATES_DIR):
+        rename_templates(path.join(TEMPLATES_DIR, template_path))
 else:
     old = set(os.listdir(TEMPLATES_DIR))
     new = os.listdir(BUILT_IN_DIR)
