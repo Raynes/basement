@@ -1,0 +1,10 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Hi!</title>
+  </head>
+  <body>
+    <p>Hello {{ name }}</p>
+  </body>
+</html>

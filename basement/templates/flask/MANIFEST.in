@@ -1,0 +1,3 @@
+include requirements.txt
+recursive-include {{project-name}}/templates *
+recursive-include {{project-name}}/static *
