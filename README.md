@@ -122,7 +122,11 @@ pass = ['path/to/be/ignored/.*']
 
 `pass` can appear in your configuration and as each file is rendered, it is
 checked against the regular expressions using Python's `re.search` function. If
-any of the patterns match that file path, it is ignored and simply passed through.
+any of the patterns match that file path, it is ignored and simply passed
+through.
+
+Note that you can also use the special file extension `.basement-ignore` as
+well, as demonstrated in the next section.
 
 ## Creating Templates
 
