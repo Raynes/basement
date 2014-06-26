@@ -135,6 +135,27 @@ One thing to note is that `project-name` is filled in with the basename of the
 output path you give basement. So if you run `ment path/to/project`, your
 `project-name` will be `project`.
 
+### Special Files
+
+While writing your template (particularly if you wanted to write one to be
+included with basement), you'd likely notice that upon compilation setuptools
+tries to generate pyc files from your template py files and that'll likely cause
+errors (mustache isn't valid Python syntax for some reason ;)). The way around
+that is to add a special extension:
+
+```
+foo.py.basement-template
+```
+
+This will keep Python from compiling the file and basement will rename it when
+generating a project
+
+Another important special extension is `.basement-ignore`, which tells basement
+to not try to render the contents of the file (though if mustaches appear in the
+file name itself, those will be rendered). This is useful when you have files
+that contain `{{}}` mustaches but you don't want them to be rendered. For
+example, jinja templates.
+
 ### Template-Specific Configuration
 
 You can add configuration specifically for certain templates and any keys
