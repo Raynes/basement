@@ -25,12 +25,15 @@ well as what the built in templates are.
 
 ### Built In Templates
 
-Basement comes with two built in templates:
+Basement comes with three built in templates:
 
 * `default`: the default template (as you may have guessed) that is used when
   you don't specify a different one.
 * `app`: a template defining a skeleton project using `click` to make a simple
   program with a command line interface.
+* `flask`: a template defining a skeleton Flask website.
+  
+  
 
 You specify which template to use with the `-t` flag.
 
