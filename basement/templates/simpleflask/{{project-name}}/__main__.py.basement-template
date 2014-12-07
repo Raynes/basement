@@ -1,0 +1,14 @@
+"""Start the server and whatnot."""
+from os import environ
+from flask import Flask
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def home():
+    return "Welcome to the homeland!"
+
+
+if __name__ == '__main__':
+    app.run(debug=not environ.get("PROD", False))
