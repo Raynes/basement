@@ -10,4 +10,4 @@ app.register_blueprint(home.bp)
 
 
 if __name__ == '__main__':
-  app.run(debug=not environ.get("PROD", False))
+    app.run(debug=not environ.get("PROD", False))
